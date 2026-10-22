@@ -1,0 +1,17 @@
+# Runtime dependencies for the API (Python 3.11). Versions are those the app and tests were verified with.
+# "~=" allows patch updates only, to avoid surprise incompatibilities.
+# In Docker, torch/torchvision come from the CPU-only wheel index (see Dockerfile).
+
+torch~=2.14.1
+torchvision~=0.29.1
+grad-cam~=1.5.7
+numpy~=2.4.6
+pillow~=12.3.0
+opencv-python-headless~=5.0.0.93
+
+fastapi~=0.148.0
+python-multipart~=0.0.32
+uvicorn~=0.54.0
+
+# Zero-shot CLIP pest and symptom checks (weights downloaded at image build time)
+transformers~=5.20.1

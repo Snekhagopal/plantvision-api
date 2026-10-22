@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+.venv*/
+venv/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Local prediction history (user data)
+data/history.db
+data/history.db-journal
+data/history.db-wal
+data/history.db-shm
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

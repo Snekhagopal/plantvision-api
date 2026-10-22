@@ -1,0 +1,196 @@
+{
+  "created_with": "python -m src.evaluation.calibrate",
+  "notes": "Thresholds fitted on train/validation only. Test metrics are reporting-only.",
+  "thresholds": {
+    "temperature": 0.9035579607653256,
+    "confidence_threshold": 0.61,
+    "ood_threshold": 67.80850527725526,
+    "plant_mass_threshold": 0.5,
+    "brightness_min": 0.1,
+    "brightness_max": 0.95,
+    "blur_min_variance": 20.0,
+    "vegetation_min_fraction": 0.05,
+    "pest_screen_threshold": 0.6768091320991516,
+    "pest_screen_threshold_imagenet": 0.3707401156425476,
+    "symptom_clear_threshold": 0.58,
+    "symptom_pair_threshold": 0.74
+  },
+  "validation_report": {
+    "accuracy": 0.9517220172201722,
+    "ece_uncalibrated": 0.011507816333209166,
+    "ece_temperature_scaled": 0.003475244685109357,
+    "selective": {
+      "coverage": 0.9603321033210332,
+      "accuracy_on_accepted": 0.9700608389369196
+    },
+    "ood_flag_rate": 0.02506150061500615,
+    "low_vegetation_flag_rate": 0.0006150061500615006,
+    "blur_flag_rate": 0.0024600246002460025,
+    "pest_flag_rate": 0.00507380073800738
+  },
+  "test_report": {
+    "n": 10948,
+    "accuracy": 0.9438253562294483,
+    "ece_uncalibrated": 0.0063299014157171775,
+    "ece_temperature_scaled": 0.004203014034923549,
+    "selective": {
+      "coverage": 0.9554256485202777,
+      "accuracy_on_accepted": 0.9652963671128107
+    },
+    "ood_flag_rate": 0.026854219948849106,
+    "pest_flag_rate": 0.005023748629886737
+  },
+  "pest_screen_report": {
+    "model": "openai/clip-vit-large-patch14",
+    "prompts": [
+      "a close-up photo of a plant leaf infested with small insects such as whiteflies, aphids, mealybugs or scale insects",
+      "a close-up photo of a plant leaf with insect eggs on it",
+      "a close-up photo of a plant leaf with spider mites and fine webbing",
+      "a close-up photo of a caterpillar, beetle or other insect on a plant leaf",
+      "a close-up photo of a plant leaf with fungal or bacterial disease spots",
+      "a close-up photo of a plant leaf covered in white powdery mildew",
+      "a close-up photo of a plant leaf with yellowing or dead brown patches",
+      "a close-up photo of a healthy green plant leaf"
+    ],
+    "threshold": 0.6768091320991516,
+    "pest_free_sample": 1000,
+    "pest_free_flag_rate": 0.01,
+    "pest_free_percentiles": {
+      "50": 0.11224747449159622,
+      "90": 0.4087830185890198,
+      "95": 0.5257930159568787,
+      "99": 0.6768091320991516
+    },
+    "classes_most_flagged": {
+      "Squash___Powdery_mildew": 0.10256410256410256,
+      "Corn_(maize)___Common_rust_": 0.08,
+      "Tomato___Early_blight": 0.05,
+      "Tomato___Target_Spot": 0.038461538461538464,
+      "Tomato___healthy": 0.03125
+    },
+    "spider_mite_images": 201,
+    "spider_mite_flag_rate": 0.004975124378109453,
+    "note": "Hit rate on real pest photos: see pest_screen_ip102_eval (src/evaluation/evaluate_pest.py)."
+  },
+  "pest_screen_ip102_eval": {
+    "dataset": "IP102 v1.1 (Wu et al., CVPR 2019)",
+    "per_class": 20,
+    "threshold": 0.6768091320991516,
+    "test_images": 2040,
+    "test_hit_rate": 0.8313725490196079,
+    "test_hit_rate_by_crop": {
+      "Alfalfa": 0.8923076923076924,
+      "Beet": 0.8875,
+      "Citrus": 0.8052631578947368,
+      "Corn": 0.8307692307692308,
+      "Mango": 0.895,
+      "Rice": 0.6821428571428572,
+      "Vitis": 0.840625,
+      "Wheat": 0.8944444444444445
+    },
+    "test_score_percentiles": {
+      "10": 0.3886737525463104,
+      "25": 0.8441536128520966,
+      "50": 0.9752865731716156,
+      "75": 0.9951805472373962,
+      "90": 0.9985504746437073
+    },
+    "pest_free_flag_rate": 0.01,
+    "tradeoff_on_val": [
+      {
+        "pest_free_flag_rate": 0.005,
+        "threshold": 0.7094110250473022,
+        "ip102_val_hit_rate": 0.8066528066528067
+      },
+      {
+        "pest_free_flag_rate": 0.01,
+        "threshold": 0.6768091320991516,
+        "ip102_val_hit_rate": 0.8217255717255717
+      },
+      {
+        "pest_free_flag_rate": 0.02,
+        "threshold": 0.5968242883682251,
+        "ip102_val_hit_rate": 0.8503118503118503
+      },
+      {
+        "pest_free_flag_rate": 0.05,
+        "threshold": 0.5257930159568787,
+        "ip102_val_hit_rate": 0.8612266112266113
+      },
+      {
+        "pest_free_flag_rate": 0.1,
+        "threshold": 0.4087830185890198,
+        "ip102_val_hit_rate": 0.8866943866943867
+      }
+    ],
+    "note": "Every IP102 image counts as a positive; some show insects away from plants.",
+    "test_least_detected_classes": {
+      "Colomerus vitis": 0.25,
+      "paddy stem maggot": 0.35,
+      "Chrysomphalus aonidum": 0.35,
+      "Phyllocoptes oleiverus ashmead": 0.45,
+      "mole cricket": 0.5,
+      "Parlatoria zizyphus Lucus": 0.5,
+      "rice water weevil": 0.5,
+      "wireworm": 0.55
+    },
+    "test_most_detected_classes": {
+      "Pieris canidia": 1.0,
+      "oides decempunctata": 1.0,
+      "aphids": 1.0,
+      "lytta polita": 1.0,
+      "Xylotrechus": 1.0
+    }
+  },
+  "symptom_screen_report": {
+    "model": "openai/clip-vit-large-patch14",
+    "method": "zero-shot prompt ensemble (no PlantVillage training)",
+    "test_images": 925,
+    "test": {
+      "accuracy": 0.7102702702702702,
+      "balanced_accuracy": 0.6642222222222223,
+      "recall_by_symptom": {
+        "healthy": 0.6833333333333333,
+        "spots": 0.7577777777777778,
+        "mildew": 0.74,
+        "rust": 0.46,
+        "mottling": 0.68
+      }
+    },
+    "test_accuracy_by_plant": {
+      "Apple": 0.6,
+      "Blueberry": 0.88,
+      "Cherry (including sour)": 0.68,
+      "Corn (maize)": 0.77,
+      "Grape": 0.69,
+      "Orange": 0.76,
+      "Peach": 0.66,
+      "Pepper, bell": 0.84,
+      "Potato": 0.9333333333333333,
+      "Raspberry": 0.96,
+      "Soybean": 0.56,
+      "Squash": 1.0,
+      "Strawberry": 0.82,
+      "Tomato": 0.5644444444444444
+    },
+    "threshold": 0.58,
+    "test_share_clear": 0.6486486486486487,
+    "test_accuracy_when_clear": 0.8283333333333334,
+    "pair_threshold": 0.74,
+    "test_share_two_patterns": 0.22486486486486487,
+    "test_true_pattern_in_pair": 0.9134615384615384,
+    "test_share_no_clear_pattern": 0.1264864864864865,
+    "rejected_trained_probe_leave_one_species_out": {
+      "accuracy": 0.7005405405405405,
+      "balanced_accuracy": 0.35044444444444445,
+      "recall_by_symptom": {
+        "healthy": 0.9033333333333333,
+        "spots": 0.8355555555555556,
+        "mildew": 0.0,
+        "rust": 0.0,
+        "mottling": 0.013333333333333334
+      }
+    },
+    "note": "PlantVillage lab photos only; real garden photos will likely score lower. Prompts were written once after the trained probe failed, not tuned on the test sample."
+  }
+}
